@@ -8,6 +8,8 @@
       {% if '/edit/' in request.path %}
         <!-- Вывести заголовок и номер записи. -->
         <div class="card-header">Редактировать запись {{ form.instance.pk }}</div>
+      {% elif '/delete/' in request.path %}
+        <div class="card-header">Удалить запись {{ data.pk }}</div>
       {% else %}
         <div class="card-header">Калькулятор ожидания дня рождения</div>
       {% endif %}
@@ -16,7 +18,12 @@
         <form method="post">
           <!-- Добавьте тег csrf_token. Без него POST-запрос будет отклонён. -->
           {% csrf_token %}
-          {% bootstrap_form form %}
+          {% if not '/delete/' in request.path %}
+            {% bootstrap_form form %}
+          {% else %}
+            <p>{{ data.first_name }} {{ data.last_name }}</p>
+            <p>{{ data.birthday }}</p>
+          {% endif %}
           {% bootstrap_button button_type='submit' content='Отправить' %}
         </form>
       </div>
