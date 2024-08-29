@@ -1,5 +1,28 @@
+
 {% extends "base.html" %}
+<!-- Подключаем библиотеку django_bootstrap5. -->
+{% load django_bootstrap5 %}
 
 {% block content %}
-
+  <div class="card col-4">
+    <div class="card-header">
+      Калькулятор ожидания дня рождения
+    </div>
+    <div class="card-body">
+      <form method="post">
+        <!-- Добавьте тег csrf_token. Без него POST-запрос будет отклонён. -->
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button button_type="submit" content="Отправить" %}
+      </form>
+    </div>
+  </div>
+  {% with data=request.POST %}   
+    <!-- В дальнейшем используем имя data вместо request.GET -->
+    {% if form.is_valid %}
+      <h2>Привет, {{ data.first_name }} {{ data.last_name }}</h2>
+    {% endif %}
+  <!-- Когда заканчивается область шаблона, где нужна переменная, 
+    закрываем тег with -->
+  {% endwith %}
 {% endblock %}

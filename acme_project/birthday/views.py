@@ -1,6 +1,13 @@
+# birthday/views.py
 from django.shortcuts import render
+
+# Импортируем класс BirthdayForm, чтобы создать экземпляр формы.
+from .forms import BirthdayForm
 
 
 def birthday(request):
-    context = {}
-    return render(request, 'birthday/birthday.html', context=context)
+    form = BirthdayForm(request.POST or None)
+    if form.is_valid():
+        pass
+    context = {'form': form}
+    return render(request, 'birthday/birthday.html', context)
