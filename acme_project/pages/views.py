@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
+
+from birthday.models import Birthday
 
 
-def homepage(request):
-    return render(request, 'pages/index.html')
+class HomePage(TemplateView):
+    template_name = 'pages/index.html'
