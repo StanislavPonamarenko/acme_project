@@ -4,7 +4,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-m&$lzdzkutvrbr5vt=jpm)7#g7cken_tk%($ty+w902n7wb#=e'
 
-DEBUG = True
+DEBUG = False
 
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -14,9 +14,14 @@ EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
 
 LOGIN_REDIRECT_URL = 'pages:homepage'
 
+CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
+
 LOGIN_URL = 'login'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -28,6 +33,7 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'birthday.apps.BirthdayConfig',
     'pages.apps.PagesConfig',
+    'core.apps.CoreConfig'
 ]
 
 MIDDLEWARE = [
